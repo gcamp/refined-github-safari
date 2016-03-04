@@ -1,4 +1,4 @@
-# <img src="refined-github/extension/icon.png" width="45" align="left"> Refined GitHub
+# <img src="icon.png" width="45" align="left"> Refined GitHub
 
 > Safari extension that simplifies the GitHub interface and adds useful features
 
