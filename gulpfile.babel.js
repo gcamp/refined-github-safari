@@ -30,9 +30,15 @@ gulp.task('styles', () => {
 // Safari
 gulp.task('safari:js', () => {
 	const src = [
-	'./refined-github/extension/content.js',
-	'./refined-github/extension/vendor/gh-injection.js',
+	'./libs/jquery.min.js',
 	'./refined-github/extension/vendor/sprint.min.js',
+	'./refined-github/extension/vendor/gh-injection.js',
+	'./refined-github/extension/util.js',
+	'./refined-github/extension/page-detect.js',
+	'./refined-github/extension/diffheader.js',
+	'./refined-github/extension/reaction-avatars.js',
+	'./refined-github/extension/copy-file.js',
+	'./refined-github/extension/content.js',
 	]
 	.concat('./src/refined-github.js')
 
