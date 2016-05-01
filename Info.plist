@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Content</key>
@@ -23,6 +23,7 @@
 			<key>Start</key>
 			<array>
 				<string>refined-github.js</string>
+				<string>refined-github-libs.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>

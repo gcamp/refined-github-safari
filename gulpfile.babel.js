@@ -2,8 +2,6 @@ import gulp from 'gulp'
 import fs from 'fs'
 import path from 'path'
 import {merge} from 'event-stream'
-import map from 'map-stream'
-import {spawn} from 'child_process'
 const $ = require('gulp-load-plugins')()
 
 // Tasks
@@ -28,11 +26,23 @@ gulp.task('styles', () => {
 })
 
 // Safari
+gulp.task('safari:jslibs', () => {
+	const libs = [
+		'./libs/jquery.min.js',
+		'./refined-github/extension/vendor/sprint.min.js',
+		'./refined-github/extension/vendor/gh-injection.js'
+	]
+	.concat('./src/refined-github-libs.js')
+
+	return pipe(
+		libs, 
+		$.concat('refined-github-libs.js'),
+		'./tmp'
+	)
+})
+
 gulp.task('safari:js', () => {
 	const src = [
-	'./libs/jquery.min.js',
-	'./refined-github/extension/vendor/sprint.min.js',
-	'./refined-github/extension/vendor/gh-injection.js',
 	'./refined-github/extension/util.js',
 	'./refined-github/extension/page-detect.js',
 	'./refined-github/extension/diffheader.js',
@@ -44,18 +54,18 @@ gulp.task('safari:js', () => {
 
 	return pipe(
 		src,
-		$.babel(),
+		$.babel({presets: ['es2015'], "plugins": [["transform-strict-mode", {"strict": true}]]}),
 		$.concat('refined-github.js'),
-		$.preprocess(),
+		$.preprocess({context: {SAFARI: true}}),
 		'./tmp'
-		)
+	)
 })
 
-gulp.task('safari', ['safari:js'], () => {
+gulp.task('safari', ['safari:jslibs', 'safari:js'], () => {
 	return merge(
 		pipe('./refined-github/extension/icon.png', './tmp/safari/refined-github.safariextension/'),
 		pipe(
-			['./tmp/refined-github.*', './Info.plist'],
+			['./tmp/refined-github*', './Info.plist'],
 			'./tmp/safari/refined-github.safariextension/'
 			)
 		)
